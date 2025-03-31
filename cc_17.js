@@ -110,3 +110,29 @@ let vipCustomer2 = new VIPCustomer("Mark Eve", "Mark.E@outlook.com", "Gold");
 vipCustomer2.addPurchase(1000);
 console.log(`Created VIP customer: ${vipCustomer2.name}, Level: ${vipCustomer2.vipLevel}`);
 console.log(`Total with 10% bonus: $${vipCustomer2.getTotalSpent().toFixed(2)}`);
+
+// Task 4 - Build Client Report System
+
+// Add VIP customers to sales rep
+salesRep1.addClient(vipCustomer1);
+salesRep1.addClient(vipCustomer2);
+
+// Combine all customers into one array
+const allCustomers = [customer1, customer2, vipCustomer1, vipCustomer2];
+
+// Calculate total revenue from all customers
+const totalRevenue = allCustomers.reduce((sum, customer) => sum + customer.getTotalSpent(), 0);
+console.log(`Total Revenue from all customers: $${totalRevenue.toFixed(2)}`);
+
+// Find high-spending customers (over $500)
+const highSpenders = allCustomers.filter(customer => customer.getTotalSpent() > 500);
+console.log("High-spending customers (>$500):");
+highSpenders.forEach(customer => {
+    console.log(`- ${customer.name}: $${customer.getTotalSpent().toFixed(2)}`);
+});
+
+//Creates a summary with each customer's name and total spent (rounded)
+const customerSummary = allCustomers.map(c => (
+    {name: c.name, totalSpent: Math.round(c.getTotalSpent()) }
+));
+console.log("Customer Summary:", customerSummary);
