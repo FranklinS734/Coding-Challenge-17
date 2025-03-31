@@ -77,3 +77,36 @@ salesRep1.addClient(customer2);
 // Check client totals
 console.log(`${customer1.name}'s total: $${salesRep1.getClientTotal(customer1.name)}`);
 console.log(`${customer2.name}'s total: $${salesRep1.getClientTotal(customer2.name)}`);
+
+// Task 3 :  Create a VIPCustomer Class (extends Customer)
+// This class represents VIP customers who get a 10% bonus
+class VIPCustomer extends Customer {
+    constructor(name, email, vipLevel) {
+        // Call parent class constructor
+        super(name, email);
+        
+        // Set VIP level (Gold or Platinum)
+        this.vipLevel = vipLevel;
+    }
+
+    // Override getTotalSpent to add 10% bonus
+    getTotalSpent() {
+        // Get base total from parent class
+        const baseTotal = super.getTotalSpent();
+        
+        // Add 10% bonus for VIP customers
+        return baseTotal * 1.1;
+    }
+}
+
+// Test Task 3 - Create VIP customers
+let vipCustomer1 = new VIPCustomer("Adam Smith", "Adam.S@gmail.com", "Platinum");
+vipCustomer1.addPurchase(500);
+vipCustomer1.addPurchase(300);
+console.log(`Created VIP customer: ${vipCustomer1.name}, Level: ${vipCustomer1.vipLevel}`);
+console.log(`Total with 10% bonus: $${vipCustomer1.getTotalSpent().toFixed(2)}`);
+
+let vipCustomer2 = new VIPCustomer("Mark Eve", "Mark.E@outlook.com", "Gold");
+vipCustomer2.addPurchase(1000);
+console.log(`Created VIP customer: ${vipCustomer2.name}, Level: ${vipCustomer2.vipLevel}`);
+console.log(`Total with 10% bonus: $${vipCustomer2.getTotalSpent().toFixed(2)}`);
